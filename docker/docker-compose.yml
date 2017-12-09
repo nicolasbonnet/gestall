@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+    db:
+        image: mysql
+        volumes:
+            - "./.data/db:/var/lib/mysql"
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_USER}
+    php:
+        build: php
+        ports:
+            - 8001:80
+        volumes:
+            - ${LARAVEL_APP_PATH}:/var/www/html
+#            - ../logs:/var/log/apache2/apps_error.log
+#            - ../logs:/var/log/apache2/apps_access.log
+#            - ../logs:/var/log/apache2/error.log
+        environment:
+            #change the line below with your IP address that is visible from Docker
+            #See README for instruction about how to get the right IP address
+            XDEBUG_CONFIG: remote_host=192.168.13.6
+    phpmyadmin:
+            image: phpmyadmin/phpmyadmin
+            links:
+                - db
+            ports:
+                - "8080:80"
