@@ -65,3 +65,4 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 Supprimerait app/Http/Controllers/TaskController.php
+/apps/V5.5/nbproject/private/
