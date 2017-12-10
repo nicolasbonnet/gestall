@@ -6,14 +6,6 @@
  * Time: 11:25
  */
 ?>
-        <?php
-/**
- * Created by PhpStorm.
- * User: nicolas
- * Date: 05/11/17
- * Time: 11:25
- */
-?>
         <!DOCTYPE html>
 <html>
 <head>

@@ -20,5 +20,33 @@
 @endsection
 
 @section('content')
-    <h1>Hello World !!</h1>
+    @if(isset($error))
+        {{ $error }}
+    @endif
+    
+    @include('layout.errors')
+
+    <form method="post" action="{{ isset($task->id) ? route('task_update', ['id' => $task->id]) : route('task_valid')  }}">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" placeholder="Set a name" class="form-control" value="{{ isset($task) ? $task->name : '' }}">
+        </div>
+        <div class="form-group">
+            <label for="link">Description</label>
+            <input type="text" name="description" id="description" placeholder="Set a description" class="form-control" value="{{ $task->description or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="link">Begin_date</label>
+            <input type="text" name="begin_date" id="begin_date" placeholder="Set a date" class="form-control" value="{{ $task->begin_date or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="link">End_date</label>
+            <input type="text" name="end_date" id="end_date" placeholder="Set a date" class="form-control" value="{{ $task->end_date or '' }}">
+        </div>
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-info">Add a Task</button>
+        </div>
+    </form>
 @endsection
