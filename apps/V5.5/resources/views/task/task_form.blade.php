@@ -35,13 +35,19 @@
             <label for="link">Description</label>
             <input type="text" name="description" id="description" placeholder="Set a description" class="form-control" value="{{ $task->description or '' }}">
         </div>
-        <div class="form-group">
-            <label for="link">Begin_date</label>
-            <input type="text" name="begin_date" id="begin_date" placeholder="Set a date" class="form-control" value="{{ $task->begin_date or '' }}">
+        <div class="input-group date">
+            <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </div>
+            <label for="begin_date">Begin_date</label>
+            <input type="text" name="begin_date" id="begin_date" placeholder="Set a date" class="form-control datepicker" value="{{ $task->begin_date or '' }}">
         </div>
-        <div class="form-group">
-            <label for="link">End_date</label>
-            <input type="text" name="end_date" id="end_date" placeholder="Set a date" class="form-control" value="{{ $task->end_date or '' }}">
+        <div class="input-group date">
+            <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </div>
+            <label for="end_date">End_date</label>
+            <input type="text" name="end_date" id="end_date" placeholder="Set a date" class="form-control datepicker" value="{{ $task->end_date or '' }}">
         </div>
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -49,4 +55,13 @@
             <button type="submit" class="btn btn-info">Add a Task</button>
         </div>
     </form>
+@endsection
+
+@section('javascript')
+    <script type="text/javascript">
+        $('.datepicker').datepicker({
+            autoclose: true,
+            format: "YYYY-MM-DD"
+        });
+    </script>
 @endsection

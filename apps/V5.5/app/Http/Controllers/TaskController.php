@@ -36,17 +36,16 @@ class TaskController extends Controller
             'name' => 'required|max:100',
             'description' => 'required|max:255'
         ]);
-        
-        $task = new Task();
-        $task->name = request('name'); 
-        $task->description = request('description');
-        $task->begin_date = new \DateTime(request('begin_date'));
-        $task->end_date = new \DateTime(request('end_date'));
-         
+
         try{
+            $task = new Task();
+            $task->name = request('name');
+            $task->description = request('description');
+            $task->begin_date = new \DateTime(request('begin_date'));
+            $task->end_date = new \DateTime(request('end_date'));
             $task->save();
         } catch (Exception $ex) {
-            dd($ex);
+            return redirect('task_form')->with('error', $ex->getMessage());
         }
         return redirect('/task_list')->with('success', 'new task created');
     }

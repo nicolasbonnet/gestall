@@ -579,6 +579,7 @@
 <script type="text/javascript">
     $.widget.bridge('uibutton', $.ui.button);
 </script>
+@yield('javascript')
 </body>
 </html>
 
