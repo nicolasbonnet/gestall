@@ -13,16 +13,41 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function listAll(){
-        $tasks = Task::all();
+        //$tasks = Task::all();
+        $tasks = Task::paginate(5);
         return View('task/list')->with('tasks',$tasks);
     }
 
     /**
-     * return list of task
+     * return update a task
      * @return \Illuminate\Http\Response
      */
     public function modify(){
-            
+        $this->validate(request(), [
+            'name' => 'required|max:100',
+            'description' => 'required|max:255'
+        ]);
+
+        try{
+            $task = Task::find(request('id'));
+            $task->name = request('name');
+            $task->description = request('description');
+            $task->begin_date = new \DateTime(request('begin_date'));
+            $task->end_date = new \DateTime(request('end_date'));
+            $task->save();
+        } catch (Exception $ex) {
+            return redirect('task_form')->with('error', $ex->getMessage());
+        }
+        return redirect('/task_list')->with('success', 'task updated');
+    }
+
+    /**
+     * @param $id_task
+     * @return $this view
+     */
+    public function update($id_task){
+        $task = Task::find($id_task);
+        return view('task.task_form')->with('task', $task);
     }
     
     /**
@@ -64,7 +89,10 @@ class TaskController extends Controller
      * return list of task
      * @return \Illuminate\Http\Response
      */
-    public function remove(){
-        
+    public function delete($id_task){
+        $task = Task::find($id_task);
+        $task->delete();
+
+        return redirect('/task_list')->with('success', 'task deleted !');
     }
 }

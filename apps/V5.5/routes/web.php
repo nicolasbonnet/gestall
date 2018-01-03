@@ -22,7 +22,9 @@ Route::get('/task_list',  'TaskController@listAll')->name('task_list');
 
 Route::get('/task_form',  'TaskController@create')->name('task_add');
 Route::post('/task_valid',  'TaskController@valid')->name('task_valid');
-Route::post('/task_update',  'TaskController@modify')->name('task_update');
+Route::post('/task_modify',  'TaskController@modify')->name('task_modify');
+Route::get('/task_update/{id_task}',  'TaskController@update')->name('task_update');
+Route::get('/task_delete/{id_task}',  'TaskController@delete')->name('task_delete');
 
 
 /**

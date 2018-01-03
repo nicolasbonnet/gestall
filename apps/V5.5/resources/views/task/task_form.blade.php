@@ -21,12 +21,20 @@
 
 @section('content')
     @if(isset($error))
-        {{ $error }}
+        <div class="alert-danger">
+            {{ $error }}
+        </div>
+    @endif
+
+    @if(isset($sucess))
+        <div class="alert-success">
+            {{ $success }}
+        </div>
     @endif
     
     @include('layout.errors')
 
-    <form method="post" action="{{ isset($task->id) ? route('task_update', ['id' => $task->id]) : route('task_valid')  }}">
+    <form method="post" action="{{ isset($task->id) ? route('task_modify', ['id' => $task->id]) : route('task_valid')  }}">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" name="name" id="name" placeholder="Set a name" class="form-control" value="{{ isset($task) ? $task->name : '' }}">
