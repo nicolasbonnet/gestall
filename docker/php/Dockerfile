@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:7.1-apache
 MAINTAINER Nicolas BONNET <nicolas.bonnet07@gmail.com>
 
 #personnalization .bashrc
